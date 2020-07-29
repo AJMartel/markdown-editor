@@ -141,6 +141,7 @@ function setOutput(val) {
 
     var out = document.getElementById('out');
     var old = out.cloneNode(true);
+    val = render_hardlinebreak(val);
     out.innerHTML = md.render(val);
     emojify.run(out);
     console.log(out.innerHTML);
@@ -159,6 +160,14 @@ function setOutput(val) {
             return;
         }
     }
+}
+
+var render_hardlinebreak = function(str){
+    if(str.match(/\n\\\n/)){
+        console.log(str);
+        str = str.replace(/\n\\\n/, "<br/><br/>");
+    }
+    return str;
 }
 
 CodeMirrorSpellChecker({
